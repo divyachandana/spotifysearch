@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<div style="background-color:#73AD21">
+<img src="hero-img@2x.png" style="height:380px;display:block;margin:0 auto"></img>
+</div>
+
+<div class="div-center">
+    <div id="div-left">
+      <select ng-model="selectedSpotify" class="spotify-select" ng-change="searchSpotifyAlbums()">
+        <option value="artist">Artist</option>
+        <option value="album">Album</option>
+        <option value="playlist">Playlist</option>
+      </select>
+    </div>
+
+    <div class="search-wrapper" id="div-right">
+      <input type="text" class="search-input" ng-model="searchSpotify" ng-enter="searchSpotifyAlbums()"/>
+      <span><i class="fa fa-search" aria-hidden="true" style="margin-left:16px;font-size:18px;"></i></span>
+      <input type="button" class="search-go" value="SEARCH" placeholder="search Album" ng-click="searchSpotifyAlbums()" style="margin-top: -10px;  float:right;"/>
+    </div>
+
+    <div>
+      <ul class="recent-search">
+        <li style="margin-left:-28px"> Recent Searches : </li>
+          <li ng-repeat="search in spotifySearch">
+            <a href="" ng-click="searchSpotifyAlbums(search)">
+               {{search}}
+           </a>
+          </li>
+      </ul>
+    </div>
+
+</div>
+
+
+<div style="margin:auto;width:50%;margin-top:30px;">
+  <div ng-repeat='result in searchResult track by $index' class="gallery" ng-show="spinner == false" ng-click="showSelectedDetails(result)">
+      <img src="{{result.images[1].url}}" height="200" width="200" ></img>
+    <div class="desc"><span title="{{result.name}}">{{result.name}}</span></div>
+  </div>
+</div>
+
+
+<div class="dialog-container-wrapper" ng-show="showPopup">
+  <div class="dialog-container">
+    <img src="{{popupImg}}" height="300" width="100%" style="opacity: 1"></img>
+    <div></div>
+    <div class="dialog-close" ng-click="showPopup=false"><span><i class="fa fa-times" aria-hidden="true"></i></span></div>
+    <div class="dialog-title" style="text-transform: capitalize"> {{popupTitle}} : {{popupSearchName}}</div>
+    <div class="dialog-description">
+      <a href="{{popuphref}}" target="_blank" ng-hide="popuphref ==''">Go To Spotify</a>
+    </div>
+        <input type="button"  class="search-go" value="CLOSE"  ng-click="showPopup=false" style="margin-left:150px;margin-top:-37px;"/>
+  </div>
+</div>
+
+<div spinner ng-show="spinner == true" class="spinner-center"></div>
+<div class="div-center" ng-show="noItemsFound">Data Not Available!</div>
