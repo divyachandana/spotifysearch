@@ -1,6 +1,8 @@
 # spotifysearch
 This angularJS application uses spotify API and lets you search various albums, artists and playlists.
 
+https://divyachandana.github.io/spotifysearch/#/
+
 to run this application, follow these commands accordingly
 1) npm install http-server -g
 2) http-server folderpath  
